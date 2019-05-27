@@ -10,10 +10,11 @@ function loadEvents(){
 function submit(listToDo){
   listToDo.preventDefault();
   var input = document.querySelector('input');
-  if(input.value != '')
+  if(input.value != ''){
     addTask(input.value);
+  }
+  saveList(input.value);
   input.value = '';
-  window.localStorage.setItem("list", task)
 }
 
 // add tasks
@@ -23,6 +24,7 @@ function addTask(task){
   li.innerHTML = `<span class="delete">delete</span><input type="checkbox"><label>${task}</label>`;
   ul.appendChild(li);
   document.querySelector('.tasksBoard').style.display = 'block';
+  saveList();
 }
 
 // delete or Check
@@ -65,15 +67,19 @@ var user = window.localStorage.getItem("nama")
 document.getElementById("warning2").innerHTML='Welcome, '+user+'. What are you Going To Do Today ?'
 
 
-// // save the list in local storage
-// function saveList(){
-//   window.localStorage.setItem("list", li);
-// }
+// save the list in local storage
+function saveList(input){
+  console.log(input)
+  var str = JSON.stringify(input);
+  window.localStorage.setItem("list", str);
+}
 
 // //get the list from local storage
 // function getList(){
-//   window.localStorage.getItem("list");
+//   var str = window.localStorage.getItem("list");
+//   todos = JSON.parse(str);
 // }
 
 // getList();
+addTask();
 
