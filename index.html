@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Final Project Ricky Login</title>
+   <link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+
+<body>
+   <div class="box">
+      <form>
+         <div id="logo">
+            <img src="./img/hacktiv.png" class="image">
+         </div>
+         <div class="inputBox">
+            <input type="username" id="username" required="" onkeydown="handleEnter(event)">
+            <label>username</label>
+         </div>
+         <div class="inputBox">
+            <input type="password" id="password" required="" onkeydown="handleEnter(event)">
+            <label>password</label>
+         </div>
+         <input id="buttonLogin" type="button" value="Login" onclick="login()" onkeydown="handleEnter(event)">
+         <p id="warning1"></p>
+        </form>
+   </div>
+   <script src="./index.js"></script>
+</body>
