@@ -6,6 +6,10 @@ function loadEvents(){
   document.querySelector('ul').addEventListener('click',deleteOrCheck);
 }
 
+// welcome message to user
+var user = window.localStorage.getItem("nama")
+document.getElementById("warning2").innerHTML='Welcome, '+user+'. What are you Going To Do Today ?'
+
 // submit data function
 function submit(listToDo){
   listToDo.preventDefault();
@@ -13,7 +17,6 @@ function submit(listToDo){
   if(input.value != ''){
     addTask(input.value);
   }
-  saveList(input.value);
   input.value = '';
 }
 
@@ -24,7 +27,7 @@ function addTask(task){
   li.innerHTML = `<span class="delete">delete</span><input type="checkbox"><label>${task}</label>`;
   ul.appendChild(li);
   document.querySelector('.tasksBoard').style.display = 'block';
-  saveList();
+  storeList(li.innerHTML)
 }
 
 // delete or Check
@@ -62,24 +65,14 @@ function clearList(listToDo){
   var ul = document.querySelector('ul').innerHTML = '';
 }
 
-// welcome message to user
-var user = window.localStorage.getItem("nama")
-document.getElementById("warning2").innerHTML='Welcome, '+user+'. What are you Going To Do Today ?'
-
-
-// save the list in local storage
-function saveList(input){
-  console.log(input)
+// store the Todo list in local storage
+function storeList(input){
   var str = JSON.stringify(input);
-  window.localStorage.setItem("list", str);
+  window.localStorage.setItem("todos", str);
 }
 
-// //get the list from local storage
+// // get the Todo list form local storage
 // function getList(){
-//   var str = window.localStorage.getItem("list");
-//   todos = JSON.parse(str);
+//   var str = window.localStorage.getItem("todos");
+//   console.log(str, typeof str)
 // }
-
-// getList();
-addTask();
-
