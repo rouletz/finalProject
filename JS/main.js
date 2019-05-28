@@ -27,7 +27,7 @@ function addTask(task){
   li.innerHTML = `<span class="delete">delete</span><input type="checkbox"><label>${task}</label>`;
   ul.appendChild(li);
   document.querySelector('.tasksBoard').style.display = 'block';
-  storeList(li.innerHTML)
+  storeList(task);
 }
 
 // delete or Check
@@ -44,6 +44,7 @@ function deleteTask(listToDo){
   var remove = listToDo.target.parentNode;
   var parentNode = remove.parentNode;
   parentNode.removeChild(remove);
+  storeList();
 }
 
 // check a task
@@ -67,12 +68,19 @@ function clearList(listToDo){
 
 // store the Todo list in local storage
 function storeList(input){
-  var str = JSON.stringify(input);
-  window.localStorage.setItem("todos", str);
+  var lsData = localStorage.getItem("todos");
+  if (lsData == null){
+    lsData = "";
+  }
+  lsData+=input;
+  window.localStorage.setItem("todos", lsData)
 }
 
 // // get the Todo list form local storage
 // function getList(){
-//   var str = window.localStorage.getItem("todos");
-//   console.log(str, typeof str)
+//   var data = window.localStorage.getItem("todos")
+//   var decode = JSON.parse(data)
+//   for (var i = 0; i<data.length; i++){
+//    li.innerHTML = `<span class="delete">delete</span><input type="checkbox"><label>${data[i]}</label>`;
+//   }
 // }
