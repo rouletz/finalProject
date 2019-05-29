@@ -4,6 +4,7 @@ function loadEvents(){
   document.querySelector('form').addEventListener('submit',submit);
   document.getElementById('clear').addEventListener('click',clearList);
   document.querySelector('ul').addEventListener('click',deleteOrCheck);
+  getList()
 }
 
 // welcome message to user
@@ -24,9 +25,9 @@ function submit(listToDo){
 function addTask(task){
   var ul = document.querySelector('ul');
   var li = document.createElement('li');
-  li.innerHTML = `<span class="delete">delete</span><input type="checkbox"><label>${task}</label>`;
-  ul.appendChild(li);
-  document.querySelector('.tasksBoard').style.display = 'block';
+    li.innerHTML = `<span class="delete">delete</span><input type="checkbox"><label>${task}</label>`;
+    ul.appendChild(li);
+    document.querySelector('.tasksBoard').style.display = 'block';
   storeList(task);
 }
 
@@ -51,11 +52,9 @@ function deleteTask(listToDo){
 function checkTask(listToDo){
   var task = listToDo.target.nextSibling;
   if(listToDo.target.checked){
-    // task.style.textDecoration = "line-through";
     task.style.backgroundColor = "green";
     task.style.color = "white";
   }else {
-    // task.style.textDecoration = "none";
     task.style.backgroundColor = "transparent";
     task.style.color = "white";
   }
@@ -68,19 +67,26 @@ function clearList(listToDo){
 
 // store the Todo list in local storage
 function storeList(input){
-  var lsData = localStorage.getItem("todos");
-  if (lsData == null){
-    lsData = "";
+  var lsData = JSON.parse(window.localStorage.getItem("todos"));
+  if(lsData==null){
+    lsData=[];
   }
-  lsData+=input;
-  window.localStorage.setItem("todos", lsData)
+  lsData.push(input)
+  window.localStorage.setItem("todos", JSON.stringify(lsData))
 }
 
 // // get the Todo list form local storage
 // function getList(){
-//   var data = window.localStorage.getItem("todos")
-//   var decode = JSON.parse(data)
+//   var ul = document.querySelector('ul');
+//   var li = document.createElement('li');
+//   var data = JSON.parse(window.localStorage.getItem("todos"));
+  
+//   console.log('ini console log var data di atas for', data.length)
+  
 //   for (var i = 0; i<data.length; i++){
-//    li.innerHTML = `<span class="delete">delete</span><input type="checkbox"><label>${data[i]}</label>`;
-//   }
+//     console.log('ini console.log bagian bawah for', data[i])
+  
+//     li.innerHTML=`<span class="delete">delete</span><input type="checkbox"><label>${data[i]}</label>`;
+//     ul.appendChild(li);
+//  }
 // }
