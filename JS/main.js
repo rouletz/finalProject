@@ -75,18 +75,14 @@ function storeList(input){
   window.localStorage.setItem("todos", JSON.stringify(lsData))
 }
 
-// // get the Todo list form local storage
-// function getList(){
-//   var ul = document.querySelector('ul');
-//   var li = document.createElement('li');
-//   var data = JSON.parse(window.localStorage.getItem("todos"));
-  
-//   console.log('ini console log var data di atas for', data.length)
-  
-//   for (var i = 0; i<data.length; i++){
-//     console.log('ini console.log bagian bawah for', data[i])
-  
-//     li.innerHTML=`<span class="delete">delete</span><input type="checkbox"><label>${data[i]}</label>`;
-//     ul.appendChild(li);
-//  }
-// }
+// get the Todo list form local storage and show
+function getList(){
+  var lsData = JSON.parse(window.localStorage.getItem("todos"))
+  for(var i=0; i<lsData.length; i++){
+    if (lsData[i]==null){
+      lsData[i]=[];
+  }else{
+    addTask(lsData[i])
+  }
+}
+}
