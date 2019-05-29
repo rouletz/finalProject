@@ -78,11 +78,13 @@ function storeList(input){
 // get the Todo list form local storage and show
 function getList(){
   var lsData = JSON.parse(window.localStorage.getItem("todos"))
-  for(var i=0; i<lsData.length; i++){
-    if (lsData[i]==null){
-      lsData[i]=[];
-    }else{
-      addTask(lsData[i])
+  var ul = document.querySelector('ul');
+  var li = document.createElement('li');
+  for(var i = 0;i<lsData.length; i++){
+    if(lsData[i]!==null){
+      li.innerHTML = `<span class="delete">delete</span><input type="checkbox"><label>${lsData[i]}</label>`;
+      ul.appendChild(li);
+      document.querySelector('.tasksBoard').style.display = 'block';
     }
   }
 }
