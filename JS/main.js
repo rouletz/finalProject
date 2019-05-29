@@ -81,8 +81,8 @@ function getList(){
   for(var i=0; i<lsData.length; i++){
     if (lsData[i]==null){
       lsData[i]=[];
-  }else{
-    addTask(lsData[i])
+    }else{
+      addTask(lsData[i])
+    }
   }
-}
 }
